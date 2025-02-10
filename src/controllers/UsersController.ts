@@ -5,14 +5,23 @@ import { User } from "../entity/User";
 
 const router = express.Router();
 
-//Criar a rota para cadastrar usuário
+router.get("/users", async(req: Request, res: Response) => {
+    try {
+        const userRepository = AppDataSource.getRepository(User)
 
+        const users = await userRepository.find();
+        res.status(200).json(users)
+    } catch(error) {
+        res.status(500).json({
+            message:"Erro ao cadastrar usuário!"
+        })
+    }
+});
+
+//Criar a rota para cadastrar usuário
 router.post("/users", async (req: Request, res:Response) => {
     try {
-        let data = req.body
-        // console.log(data)
-        
-        //Criar uma instância do repositório de User
+        let data = req.body;
         const userRepository = AppDataSource.getRepository(User);
 
         const existingUser = await userRepository.findOne({ where: {email: data.email}})
