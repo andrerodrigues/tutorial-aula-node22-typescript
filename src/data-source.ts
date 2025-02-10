@@ -10,3 +10,11 @@ export const AppDataSource = new DataSource({
     migrations:[__dirname + "/migration/*.ts"],
     synchronize: true, // True apenas para desenvolvimento
 });
+
+AppDataSource.initialize()
+    .then(() => {
+        console.log("Banco de dados conectado com sucesso!");
+})
+.catch((error) => {
+    console.error("Erro ao conectar ao banco de dados:", error);
+});
