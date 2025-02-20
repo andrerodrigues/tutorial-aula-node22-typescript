@@ -5,6 +5,7 @@ import UsersController from './controllers/UsersController';
 const app = express();
 //Criar o middleware para receber os dados no corpo da requisição
 app.use(express.json());
+const PORT = 3000;
 
 app.use('/', UsersController)
 
@@ -13,11 +14,12 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // Inicia o servidor em uma porta livre escolhida pelo sistema
-const server = app.listen(0, () => {
-    const address = server.address();
-    if (typeof address === "object" && address !== null) {
-        console.log(`Servidor iniciado na porta ${address.port}: http://localhost:${address.port}`);
-    }
+const server = app.listen(PORT, () => {
+    console.log(`Servidor iniciado na porta ${PORT}: http://localhost:${PORT}`);
+    // const address = server.address();
+    // if (typeof address === "object" && address !== null) {
+    //     console.log(`Servidor iniciado na porta ${address.port}: http://localhost:${address.port}`);
+    // }
 });
 
 // AppDataSource.initialize()
