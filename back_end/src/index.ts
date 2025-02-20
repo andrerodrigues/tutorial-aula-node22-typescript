@@ -1,11 +1,13 @@
 import express, { Request, Response } from "express";
-import { AppDataSource } from "./data-source";
+//import { AppDataSource } from "./data-source";
 import UsersController from './controllers/UsersController';
+import cors from 'cors';
 
 const app = express();
 //Criar o middleware para receber os dados no corpo da requisição
+app.use(cors());
 app.use(express.json());
-const PORT = 3000;
+const PORT = 5000;
 
 app.use('/', UsersController)
 
