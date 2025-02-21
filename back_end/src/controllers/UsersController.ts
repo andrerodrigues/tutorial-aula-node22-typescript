@@ -14,7 +14,7 @@ router.get("/users", async(req: Request, res: Response) => {
         res.status(200).json(users)
     } catch(error) {
         res.status(500).json({
-            message:"Erro ao cadastrar usuário!"
+            message:"Erro ao listar usuário!"
         })
     }
 });
