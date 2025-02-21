@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column"
 import { Button } from "primereact/button";
+import Link from "next/link";
 
 interface User {
     id: number;
@@ -31,11 +32,20 @@ export default function Users() {
     }, []);
 
     const tableHeader = (
-        <div className="flex items-center justify-between p-3 bg-blue-100 rounded-lg shadow-md mb-4">
-          <h2 className="text-xl font-bold text-gray-700">Usuários</h2>
-          {/* <Button label="Adicionar Usuário" icon="pi pi-user-plus" className="p-button-success p-button-rounded p-button-sm" /> */}
+        <div className="sticky top-0 z-10 w-full p-3 bg-blue-100 shadow-md">
+            <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold text-gray-700">Listar Usuários</h2>
+    
+                <Link href="/users/create" passHref>
+                    <Button
+                        label="Cadastrar"
+                        className="bg-blue-500 text-white border-2 border-blue-500 shadow-md hover:bg-blue-600 hover:border-blue-600 rounded-md p-2 transition-all duration-200"
+                    />
+                </Link>
+            </div>
         </div>
-      );
+    );
+    
 
     return (
       <div className="p-4 bg-white rounded-lg shadow-md">
