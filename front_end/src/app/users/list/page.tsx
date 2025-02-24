@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column"
 import { Button } from "primereact/button";
+import { Card } from "primereact/card";
 import Link from "next/link";
+
+//Importar o componente Menu
+import MenuComponent from "@/components/Menu";
 
 interface User {
     id: number;
@@ -48,29 +52,45 @@ export default function Users() {
     
 
     return (
-      <div className="p-4 bg-white rounded-lg shadow-md">
-        {error && <div className="text-red-500">{error}</div>}
-            <DataTable
-                value={users}
-                header={tableHeader}
-                className="p-datatable-striped shadow-lg rounded-lg"
-                >
-                <Column
-                    field="id"
-                    header="ID"
-                    className="text-sm font-medium text-gray-700 bg-gray-100 p-2 rounded-tl-lg"
-                />
-                <Column
-                    field="name"
-                    header="Nome"
-                    className="text-sm font-medium text-gray-700 bg-gray-100"
-                />
-                <Column
-                    field="email"
-                    header="E-mail"
-                    className="text-sm font-medium text-gray-700 bg-gray-100 rounded-tr-lg"
-                />
-           </DataTable>
-    </div>
+      <div className="flex flex-col h-screen bg-gray-100">
+            <MenuComponent />
+            <div className="flex-1 px-2 py-6 max-w=6xl mx-auto w-full">
+                <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-2xl font-bold text-gray-700">Listar Usuários</h2>
+                    <Button
+                    className="bg-green-500 text-white border-2 border-green-500 rounded-md shadow-md hover:bg-green-600"
+                    >
+                        <Link href="/users/create" className="text-xl font-bold text-gray-700" passHref>Cadastrar</Link>
+                    </Button>
+                </div>
+
+                {error && <div className="text-red-500 mt-4">{error}</div>}
+                <Card className="mt-6 bg-white shadow-md rounded-lg p-6">
+                    <DataTable
+                        className="w-full border-collapse"
+                        value={users}
+                        paginator
+                        rows={5} // Define a quantidade de itens por página
+                        rowsPerPageOptions={[5]} // Define que o usuário pode ver 5 itens por vez
+                        >
+                        <Column
+                            field="id"
+                            header={<span className="text-green-500 font-bold bg-gray-100">ID</span>}
+                            className="border p-3 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-green-100"
+                        />
+                        <Column
+                            field="name"
+                            header={<span className="text-green-500 font-bold">Nome</span>} 
+                            className="border p-3  text-sm font-medium text-gray-700 bg-gray-100 hover:bg-green-100"
+                        />
+                        <Column
+                            field="email"
+                            header={<span className="text-green-500 font-bold">Email</span>}
+                            className="border p-3  text-sm font-medium text-gray-700 bg-gray-100 hover:bg-green-100"
+                        />
+                    </DataTable>
+                </Card>
+            </div>    
+      </div>
     );
 }

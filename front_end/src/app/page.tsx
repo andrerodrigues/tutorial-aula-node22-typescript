@@ -1,10 +1,12 @@
 import Link from "next/link";
 import {Button} from "primereact/button";
 import { Panel } from 'primereact/panel';
+//Importar o componente Menu
+import MenuComponent from "@/components/Menu";
 
 export default function Home() {
   return (
-    <div>
+    <div className='bg-blue-700 text-white p-4 w-full'>
        <Panel header="Bem-vindo André!" className="w-full p-4 shadow-lg rounded-lg">
         <Link href="/users/list" passHref>
               <Button
